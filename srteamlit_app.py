@@ -91,8 +91,13 @@ pattern = convert_to_regex(input_data, match_type, case_transform, word_boundary
 # Display the pattern
 st.subheader("Generated Pattern:")
 if pattern:
-    # Only show the text input for copying
-    st.text_input("", value=pattern, label_visibility="collapsed")
+    col3, col4 = st.columns([4, 1])
+    with col3:
+        pattern_input = st.text_input("", value=pattern, label_visibility="collapsed")
+    with col4:
+        if st.button("Copy Pattern"):
+            st.write("Pattern copied! ✅")
+            st.session_state['copied_pattern'] = pattern
 else:
     st.text("Enter data values above to generate pattern")
 
@@ -110,5 +115,5 @@ with st.expander("How to use"):
         - Convert to Uppercase: Transform all text to uppercase
         - Convert to Lowercase: Transform all text to lowercase
     4. Check 'Match Whole Words Only' if you want to match complete words only
-    5. Click the generated pattern text box to copy it
+    5. Click 'Copy Pattern' button or click the text field to copy the pattern
     """)
