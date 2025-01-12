@@ -91,9 +91,8 @@ pattern = convert_to_regex(input_data, match_type, case_transform, word_boundary
 # Display the pattern
 st.subheader("Generated Pattern:")
 if pattern:
-    st.code(pattern, language=None)
-    # Add a text input that's hidden but contains the pattern for copying
-    st.text_input("Pattern (click to copy):", value=pattern, label_visibility="collapsed")
+    # Only show the text input for copying
+    st.text_input("", value=pattern, label_visibility="collapsed")
 else:
     st.text("Enter data values above to generate pattern")
 
