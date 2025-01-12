@@ -1,6 +1,5 @@
 import streamlit as st
 import re
-import pyperclip
 
 def escape_regex(string):
     """Escape special regex characters"""
@@ -92,15 +91,9 @@ pattern = convert_to_regex(input_data, match_type, case_transform, word_boundary
 # Display the pattern
 st.subheader("Generated Pattern:")
 if pattern:
-    pattern_placeholder = st.code(pattern, language=None)
-    
-    # Copy button
-    if st.button("Copy Pattern"):
-        try:
-            pyperclip.copy(pattern)
-            st.success("Pattern copied to clipboard!")
-        except:
-            st.error("Could not copy to clipboard. Please copy the pattern manually.")
+    st.code(pattern, language=None)
+    # Add a text input that's hidden but contains the pattern for copying
+    st.text_input("Pattern (click to copy):", value=pattern, label_visibility="collapsed")
 else:
     st.text("Enter data values above to generate pattern")
 
@@ -118,5 +111,5 @@ with st.expander("How to use"):
         - Convert to Uppercase: Transform all text to uppercase
         - Convert to Lowercase: Transform all text to lowercase
     4. Check 'Match Whole Words Only' if you want to match complete words only
-    5. Click 'Copy Pattern' to copy the generated regex to your clipboard
+    5. Click the generated pattern text box to copy it
     """)
